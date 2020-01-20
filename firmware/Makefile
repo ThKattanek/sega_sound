@@ -56,13 +56,40 @@ TARGET = sega_sound
 
 # Interner Quarz 8MHz
 # Divide clock by 8 = disable
-LFUSE = 0xE2
+LFUSE = 0xE4
 
 # Externer Quarz
 #LFUSE = 0xFF
 
 # High Fuse Bits
-HFUSE = 0xDF
+HFUSE = 0xD9
+
+##############################################################################
+# Fuse values for particular devices
+#################################### ##########################################
+# If your device is not listed here, go to
+# http://palmavr.sourceforge.net/cgi-bin/fc.cgi
+# and choose options for external crystal clock and no clock divider
+#
+################################## ATMega8 ##################################
+# ATMega8 FUSE_L (Fuse low byte):
+# 0xe4 = 1 1 1 0   0 1 0 0
+#        ^ ^ \ /   \--+--/
+#        | |  |       +------- CKSEL 3..0 (external >8M crystal)
+#        | |  +--------------- SUT 1..0 (crystal osc, BOD enabled)
+#        | +------------------ BODEN (BrownOut Detector enabled)
+#        +-------------------- BODLEVEL (2.7V)
+# ATMega8 FUSE_H (Fuse high byte):
+# 0xd9 = 1 1 0 1   1 0 0 1 <-- BOOTRST (boot reset vector at 0x0000)
+#        ^ ^ ^ ^   ^ ^ ^------ BOOTSZ0
+#        | | | |   | +-------- BOOTSZ1
+#        | | | |   + --------- EESAVE (don't preserve EEPROM over chip erase)
+#        | | | +-------------- CKOPT (full output swing)
+#        | | +---------------- SPIEN (allow serial programming)
+#        | +------------------ WDTON (WDT not always on)
+#        +-------------------- RSTDISBL (reset pin is enabled)
+#
+
 
 AVRDUDE_PROGRAMMER = avrispmkII
 
