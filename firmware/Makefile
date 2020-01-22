@@ -101,7 +101,7 @@ AVRDUDE_ISP_SPEED = 8  # (1/1000000Hz)*4
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC = main.c
-#SRC += 
+SRC += sn76489.c
 
 # List Assembler source files here.
 # Make them always end in a capital .S.  Files ending in a lowercase .s
