@@ -21,6 +21,7 @@ PIN_14  PortB_0 -> STATUS_LED
 
 /// Declarations
 
+void clock_out_init(void);
 void status_led_init(void);
 void status_led_on(void);
 void status_led_off(void);

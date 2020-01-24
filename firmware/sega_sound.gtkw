@@ -1,0 +1,61 @@
+[*]
+[*] GTKWave Analyzer v3.3.101 (w)1999-2019 BSI
+[*] Fri Jan 24 21:01:31 2020
+[*]
+[dumpfile] "/home/thorsten/Elektronik/Projekte/sega_sound/firmware/sega_sound.vcd"
+[dumpfile_mtime] "Fri Jan 24 21:01:04 2020"
+[dumpfile_size] 136838
+[savefile] "/home/thorsten/Elektronik/Projekte/sega_sound/firmware/sega_sound.gtkw"
+[timestart] 0
+[size] 1920 977
+[pos] 3 0
+*-12.000000 15070 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 197
+[signals_width] 193
+[sst_expanded] 1
+[sst_vpaned_height] 278
+@28
++{STATUS_LED} PORTB.B0-Out
++{SOUND_WE} PORTC.C0-Out
+@c00022
++{SOUND_D0-D7} PORTD.PORT[7:0]
+@28
+(0)PORTD.PORT[7:0]
+(1)PORTD.PORT[7:0]
+(2)PORTD.PORT[7:0]
+(3)PORTD.PORT[7:0]
+(4)PORTD.PORT[7:0]
+(5)PORTD.PORT[7:0]
+(6)PORTD.PORT[7:0]
+(7)PORTD.PORT[7:0]
+@c00022
+PORTC.PIN[7:0]
+@28
+(0)PORTC.PIN[7:0]
+(1)PORTC.PIN[7:0]
+(2)PORTC.PIN[7:0]
+(3)PORTC.PIN[7:0]
+(4)PORTC.PIN[7:0]
+(5)PORTC.PIN[7:0]
++{SOUND_READY} (6)PORTC.PIN[7:0]
+(7)PORTC.PIN[7:0]
+@1401200
+-group_end
+-group_end
+@800022
+PORTC.PIN[7:0]
+@28
+(0)PORTC.PIN[7:0]
+(1)PORTC.PIN[7:0]
+(2)PORTC.PIN[7:0]
+(3)PORTC.PIN[7:0]
+(4)PORTC.PIN[7:0]
+(5)PORTC.PIN[7:0]
++{PORTC.PIN[1] SOUND_READY} (6)PORTC.PIN[7:0]
+(7)PORTC.PIN[7:0]
++{PORTB.B1-Out OC1A} PORTB.B1-Out
++{PORTB.B2-Out OC1B} PORTB.B2-Out
+@1001200
+-group_end
+[pattern_trace] 1
+[pattern_trace] 0

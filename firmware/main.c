@@ -17,18 +17,24 @@
 
 int main(void)
 {
-
+    clock_out_init();
+    
     status_led_init();
     status_led_on();
 
     init_sn76489();
-
+    
     while(1)
     {
     }
 }
 
 /* ------------------------------------------------------------------------- */
+
+void clock_out_init(void)
+{
+    DDRB |= (1 << PIN1) | (1 << PIN2);
+}
 
 void status_led_init(void)
 {

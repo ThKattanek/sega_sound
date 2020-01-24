@@ -460,6 +460,8 @@ clean_list :
 	$(REMOVE) $(TARGET).sym
 	$(REMOVE) $(TARGET).lnk
 	$(REMOVE) $(TARGET).lss
+	$(REMOVE) $(TARGET).trc
+	$(REMOVE) $(TARGET).vcd
 	$(REMOVE) $(OBJ)
 	$(REMOVE) $(LST)
 	$(REMOVE) sd_card_lib/*.lst

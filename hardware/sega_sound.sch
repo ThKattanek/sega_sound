@@ -345,7 +345,7 @@ Wire Wire Line
 Wire Wire Line
 	1650 1350 1650 1450
 Text Notes 650  600  0    50   ~ 0
-Abblockkondensatorn (U1, U2)
+Abblockkondensatoren (U1, U2)
 Text GLabel 4650 3200 2    50   Output ~ 0
 SOUND_WE
 Text GLabel 4650 3300 2    50   Input ~ 0
