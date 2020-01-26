@@ -24,6 +24,14 @@ int main(void)
 
     init_sn76489();
     
+    TCCR1A &= 0x00111100;   // Compare Output Mode for channel A
+    TCCR1A |= 0x01000000;
+
+    TCCR1B &= 0x11100111;
+    TCCR1B |= 0x00001001;
+
+    OCR1AL = 1;
+
     while(1)
     {
     }

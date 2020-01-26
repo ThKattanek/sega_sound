@@ -12,7 +12,7 @@
 /// Hardware configuration
 
 /* PinOut
-PIN_14  PortB_0 -> STATUS_LED
+PortB_0 -> STATUS_LED
 */
 
 #define STATUS_LED_PORT PORTB
