@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 2
 Title "Sega Sound with SN76489AN"
-Date "2020-01-22"
+Date "2020-01-27"
 Rev "1.0"
 Comp "Thorsten Kattanek"
 Comment1 ""
@@ -223,7 +223,6 @@ Wire Wire Line
 	1050 6950 1250 6950
 Text Notes 1200 6000 0    50   ~ 0
 ISP (6 Pin Connector)
-NoConn ~ 4500 2600
 NoConn ~ 4500 2700
 NoConn ~ 4500 3400
 NoConn ~ 4500 3500
@@ -232,7 +231,6 @@ NoConn ~ 4500 3700
 NoConn ~ 3300 3100
 NoConn ~ 3300 2900
 NoConn ~ 3300 2700
-NoConn ~ 7650 2950
 $Comp
 L Device:C C1
 U 1 1 5E288481
@@ -484,4 +482,12 @@ Wire Wire Line
 	3100 6350 3100 6500
 Text Notes 2750 5750 0    50   ~ 0
 System Status LED
+Text GLabel 4650 2600 2    50   Output ~ 0
+CLOCK_4MHZ
+Wire Wire Line
+	4500 2600 4650 2600
+Text GLabel 7550 2950 0    50   Input ~ 0
+CLOCK_4MHZ
+Wire Wire Line
+	7550 2950 7650 2950
 $EndSCHEMATC
