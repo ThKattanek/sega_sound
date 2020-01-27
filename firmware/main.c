@@ -16,22 +16,14 @@
 #include "./sn76489.h"
 
 int main(void)
-{
-    clock_out_init();
-    
+{    
     status_led_init();
     status_led_on();
 
     init_sn76489();
     
-    TCCR1A &= 0x00111100;   // Compare Output Mode for channel A
-    TCCR1A |= 0x01000000;
-
-    TCCR1B &= 0x11100111;
-    TCCR1B |= 0x00001001;
-
-    OCR1AL = 1;
-
+    clock_out_init();
+    
     while(1)
     {
     }
@@ -41,7 +33,12 @@ int main(void)
 
 void clock_out_init(void)
 {
-    DDRB |= (1 << PIN1) | (1 << PIN2);
+    DDRB |= 1 << PIN1;
+    
+    TCCR1A |= (1 << COM1A0);            //toggle OC1A
+    TCCR1B |= (1 << WGM12)|(1 << CS10); //CTC,  div64
+    TCNT1 = 0;                          //unnecessary
+    OCR1A = 0 ;    //toggle @ 8MHz -> 4MHz Clock
 }
 
 void status_led_init(void)

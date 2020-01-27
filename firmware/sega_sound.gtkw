@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.101 (w)1999-2019 BSI
-[*] Fri Jan 24 21:01:31 2020
+[*] Mon Jan 27 20:03:45 2020
 [*]
 [dumpfile] "/home/thorsten/Elektronik/Projekte/sega_sound/firmware/sega_sound.vcd"
-[dumpfile_mtime] "Fri Jan 24 21:01:04 2020"
-[dumpfile_size] 136838
+[dumpfile_mtime] "Mon Jan 27 20:02:46 2020"
+[dumpfile_size] 4809093
 [savefile] "/home/thorsten/Elektronik/Projekte/sega_sound/firmware/sega_sound.gtkw"
 [timestart] 0
 [size] 1920 977
 [pos] 3 0
-*-12.000000 15070 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-12.000000 6690 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [sst_width] 197
 [signals_width] 193
 [sst_expanded] 1
@@ -53,8 +53,10 @@ PORTC.PIN[7:0]
 (5)PORTC.PIN[7:0]
 +{PORTC.PIN[1] SOUND_READY} (6)PORTC.PIN[7:0]
 (7)PORTC.PIN[7:0]
+@29
 +{PORTB.B1-Out OC1A} PORTB.B1-Out
-+{PORTB.B2-Out OC1B} PORTB.B2-Out
+@22
+TIMER1.Counter[15:0]
 @1001200
 -group_end
 [pattern_trace] 1
