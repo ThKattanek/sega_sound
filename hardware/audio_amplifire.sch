@@ -6,7 +6,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 2
 Title "Sega Sound with SN76489AN"
-Date "2020-01-27"
+Date "2020-02-05"
 Rev "1.0"
 Comp "Thorsten Kattanek"
 Comment1 ""
