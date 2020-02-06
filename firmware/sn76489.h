@@ -46,8 +46,8 @@ PortC_2 -> SOUND_WE
 
 #include <avr/io.h>
 
-static uint8_t REG_ADR_TBL[8] = {0b00000000, 0b00001000, 0b00000100, 0b00001100, 0b00000010, 0b00001010, 0b00000110, 0b00001110};
-static uint8_t VOL_TBL[8] = {0xf0, 0x10, 0x20, 0x40, 0x80, 0x0, 0x0, 0x0};
+static const uint32_t MASTER_SOUND_CLOCK = 4000000UL;
+static const uint8_t CONV_NIBBLE[16] = {0x0, 0x8, 0x4, 0xc, 0x2, 0xa, 0x6, 0xe, 0x1, 0x9, 0x5, 0xd, 0x3, 0xb, 0x7, 0xf};
 
 void init_sn76489();
 void write_sn76489(uint8_t byte);

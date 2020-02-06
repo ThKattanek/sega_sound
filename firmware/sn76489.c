@@ -1,6 +1,7 @@
 #include "./sn76489.h"
 
-#define F_CPU 8000000
+#define F_CPU 8000000UL
+
 #include <util/delay.h>
 
 void init_sn76489()
@@ -29,6 +30,10 @@ void init_sn76489()
 
 void write_sn76489(uint8_t byte)
 {
+    // Swap all bits 0 <--> 7
+    uint8_t send_byte = CONV_NIBBLE[byte & 0x0f] << 4;
+    send_byte |= CONV_NIBBLE[byte >> 4];
+    
     /* without READY an 4MHz Clock for sn76489
     SET_SOUND_WE_HI;
     SOUND_DATA_PORT = byte;
@@ -38,7 +43,7 @@ void write_sn76489(uint8_t byte)
     */
     
     /* with READY wait */
-    SOUND_DATA_PORT = byte;
+    SOUND_DATA_PORT = send_byte;
     
     SET_SOUND_CE_LO;
     SET_SOUND_WE_LO;
@@ -51,53 +56,44 @@ void write_sn76489(uint8_t byte)
 
 // tone_nr 0-2 (Tone1-3) 
 // frequ 10Bit f=N/(32*n)   N = ref Clock in Hz / n = 10 bit binary number
-void set_sn76489_frequency(uint8_t tone_nr, uint16_t frequ)
+void set_sn76489_frequency(uint8_t tone_nr, uint16_t freq)
 {
-    if(tone_nr > 2) return;
-    
-    uint8_t reg_idx = tone_nr;
-    reg_idx &= 0x03;
-    reg_idx <<= 1;
-    
-    frequ &= 0x3ff;
-    
-    uint8_t data_word0 = REG_ADR_TBL[reg_idx] | 0b00000001;
-    
-    uint8_t f_tmp = frequ << 4;
-        for(int8_t i=7; i>=4; i--)
-            if(f_tmp & (1<<i)) data_word0 |= 1 << ((7-i)+4);
+    if(tone_nr < 3)
+    {
+        uint8_t reg_nr = tone_nr;
+        reg_nr <<= 1;   // mul 2
         
-    f_tmp = frequ >> 2;
-    uint8_t data_word1 = 0;
-    for(int8_t i=7; i>=2; i--)
-        if(f_tmp & (1<<i)) data_word1 |= 1 << ((7-i)+2);
-    
-    write_sn76489(data_word0);
-    write_sn76489(data_word1);
+        uint16_t n = MASTER_SOUND_CLOCK / ((uint32_t)freq << 5);
+        
+        uint8_t data_word0 = 0x80 | (reg_nr << 4) | (n & 0x0f);
+        uint8_t data_word1 = (n >> 4) & 0x3f;
+                
+        write_sn76489(data_word0);
+        write_sn76489(data_word1);
+    }
 }
 
-// tone_nr 0-3 (0-2=Tone1 - Tone3 / 3=Noise) volume 0-5 (6-7 is 5)
-void set_sn76489_attenuation(uint8_t tone_nr, uint8_t volume)
+// tone_nr 0-3 (0-2 = Tone1-3 / 3 = Noise) volume 0-15 (0 = off / 15 = maximum)
+void set_sn76489_volume(uint8_t tone_nr, uint8_t volume)
 {
-    uint8_t reg_idx = tone_nr;
-    reg_idx &= 0x03;
-    reg_idx <<= 1;
-    reg_idx += 1;
-    uint8_t data_word = REG_ADR_TBL[reg_idx] | 0b00000001;
-    
-    data_word |= VOL_TBL[volume & 0x07];
-    
-    write_sn76489(data_word);
+    if(tone_nr < 4)
+    {
+        uint8_t reg_nr = tone_nr;
+        reg_nr <<= 1;   // mul 2
+        reg_nr += 1;    // add 1
+        
+        uint8_t data_word = 0x80 | (reg_nr << 4) | ((0xf - volume) & 0x0f);
+        write_sn76489(data_word);
+    }
 }
 
 // value
-// Noise Feedback Conrol
-// bit0 - 0=Preriodic Noise / 1=White Noise
 // Noise Shift Rate
-// bit1-2 - 00=N/512 10=N/1024 01=N/2048 11= Tone Generator 3 Output
+// bit0-1 - 00=N/512 01=N/1024 10=N/2048 11= Tone Generator 3 Output
+// Noise Feedback Conrol
+// bit2 - 0 = Preriodic Noise / 1 = White Noise
 void set_sn76489_noise(uint8_t value)
 {
-    uint8_t data_word = REG_ADR_TBL[6] | 0b00000001;
-    data_word |= value << 5;
+    uint8_t data_word = 0x80 | (0x06 << 4) | (value & 0x07);
     write_sn76489(data_word);
 }

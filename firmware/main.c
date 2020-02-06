@@ -26,24 +26,18 @@ int main(void)
     
     clock_out_init();
         
-    set_sn76489_attenuation(0,0);
-    set_sn76489_attenuation(1,0);
-    set_sn76489_attenuation(2,0);
-    set_sn76489_attenuation(3,0);
+    set_sn76489_volume(0,0);
+    set_sn76489_volume(1,0);
+    set_sn76489_volume(2,0);
+    set_sn76489_volume(3,0);
+
+    set_sn76489_volume(2,15);
+    set_sn76489_frequency(2,440);
     
     status_led_on();
-
-    set_sn76489_attenuation(0,3);
-    set_sn76489_attenuation(1,3);
-    
-    uint16_t f=0;
     
     while(1)
     {
-        set_sn76489_frequency(0,0x3ff-f);
-        set_sn76489_frequency(1,f);
-        f++;
-        _delay_ms(1);
     }
 }
 
