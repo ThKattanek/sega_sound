@@ -25,32 +25,25 @@ int main(void)
     init_sn76489();
     
     clock_out_init();
-    
-    /*
-    write_sn76489(0b11111001);
-    write_sn76489(0b11111101);
-    write_sn76489(0b11111011);
-    write_sn76489(0b11111111);
-    
-    write_sn76489(0b00001111);
-    */
-    
-    
+        
     set_sn76489_attenuation(0,0);
     set_sn76489_attenuation(1,0);
     set_sn76489_attenuation(2,0);
     set_sn76489_attenuation(3,0);
     
     status_led_on();
+
+    set_sn76489_attenuation(0,3);
+    set_sn76489_attenuation(1,3);
+    
+    uint16_t f=0;
     
     while(1)
     {
-        for(uint8_t i=0; i<6; i++)
-        {
-        set_sn76489_attenuation(0,i);
-        
-        _delay_ms(100);
-        }
+        set_sn76489_frequency(0,0x3ff-f);
+        set_sn76489_frequency(1,f);
+        f++;
+        _delay_ms(1);
     }
 }
 
@@ -63,7 +56,7 @@ void clock_out_init(void)
     TCCR1A |= (1 << COM1A0);            //toggle OC1A
     TCCR1B |= (1 << WGM12)|(1 << CS10); //CTC,  div64
     TCNT1 = 0;                          //unnecessary
-    OCR1A = 1;    //toggle @ 8MHz -> 4MHz Clock
+    OCR1A = 0;    //toggle @ 8MHz -> 4MHz Clock
 }
 
 void status_led_init(void)

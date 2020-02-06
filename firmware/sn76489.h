@@ -52,4 +52,6 @@ static uint8_t VOL_TBL[8] = {0xf0, 0x10, 0x20, 0x40, 0x80, 0x0, 0x0, 0x0};
 void init_sn76489();
 void write_sn76489(uint8_t byte);
 
+void set_sn76489_frequency(uint8_t tone_nr, uint16_t frequ);
 void set_sn76489_attenuation(uint8_t tone_nr, uint8_t volume);
+void set_sn76489_noise(uint8_t value);
