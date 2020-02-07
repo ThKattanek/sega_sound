@@ -56,10 +56,10 @@ TARGET = sega_sound
 
 # Interner Quarz 8MHz
 # Divide clock by 8 = disable
-LFUSE = 0xE4
+# LFUSE = 0xE4
 
-# Externer Quarz
-#LFUSE = 0xFF
+# Externer Quarz 8MHz
+LFUSE = 0xCF
 
 # High Fuse Bits
 HFUSE = 0xD9
