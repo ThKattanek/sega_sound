@@ -16,6 +16,7 @@
 
 #include "./main.h"
 #include "./sn76489.h"
+#include "./sonic_title_vgm.h"
 
 int main(void)
 {    
